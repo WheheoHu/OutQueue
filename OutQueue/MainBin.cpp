@@ -22,6 +22,23 @@
 
 
 int main() {
+	std::fstream inputFile, outfile;
 
-	return 0;
+	inputFile.open("input", std::ios::in);
+	outfile.open("output",std::ios::out);
+	int MaxNum, Num_Human;
+	
+	inputFile >> MaxNum;
+	inputFile >> Num_Human;
+	int *mans = new int[Num_Human];
+	for (int i = 0; i < Num_Human; i++)
+	{
+		inputFile >> *(mans + i);
+	}
+	for (int i = 0; i < Num_Human; i++)
+	{
+		outfile << *(mans + i) << " ";
+	}
+	inputFile.close();
+	outfile.close();
 }
