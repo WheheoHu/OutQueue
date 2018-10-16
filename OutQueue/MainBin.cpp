@@ -22,23 +22,29 @@
 
 
 int main() {
+	//文件输入输出
 	std::fstream inputFile, outfile;
-
 	inputFile.open("input", std::ios::in);
-	outfile.open("output",std::ios::out);
+	outfile.open("output", std::ios::out);
 	int MaxNum, Num_Human;
-	
+
+	//读入上限MaxNum与人数Num_Human
 	inputFile >> MaxNum;
 	inputFile >> Num_Human;
-	int *mans = new int[Num_Human];
+	Cycle_Linked_List<int> CLList;
 	for (int i = 0; i < Num_Human; i++)
 	{
-		inputFile >> *(mans + i);
+		int elem;
+		inputFile >> elem;
+		CLList.CycleListInsert(i + 1, elem );
 	}
-	for (int i = 0; i < Num_Human; i++)
+
+
+	for (int i = 0; i < CLList.CycleListLength(); i++)
 	{
-		outfile << *(mans + i) << " ";
+		outfile << CLList.getElem(i + 1) << " ";
 	}
+
 	inputFile.close();
 	outfile.close();
 }

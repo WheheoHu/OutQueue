@@ -48,7 +48,7 @@ private:
 template<class T>
 inline Cycle_Linked_List<T>::Cycle_Linked_List()
 {
-	std::cout << "please init list use InitCycleList(data)!" << std::endl;
+	InitCycleList();
 }
 
 template<class T>
