@@ -29,6 +29,7 @@ public:
 	void CycleListDelete(int location);
 	void CycleListDelete(int location, T &elem);
 	T getElem(int location);
+	void Joseph(int *op, int muxnum,int num_human);
 private:
 	CycleNode<T> *head;
 	CycleNode<T> *find(int location) {
@@ -162,5 +163,15 @@ inline T Cycle_Linked_List<T>::getElem(int location)
 	CycleNode<T> *p = find(location);
 	return p->nextnode->data;
 }
+
+template<class T>
+inline void Cycle_Linked_List<T>::Joseph(int * op, int muxnum, int num_human)
+{
+
+
+
+}
+
+
 
 

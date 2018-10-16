@@ -1,3 +1,4 @@
+//约瑟夫（Joseph）问题
 //编号为1，2，3，…，n的n个人按顺时针方向围坐一圈，每人持有一个密码〈正整数〉
 //一开始任选一个正整数作为报数上限值m，从第一个人开始按顺时针方向自1开始顺序报数，报到m时停止报数
 //报m的人出列，将他的密码作为新的m值，从他在顺时针方向上的下一个人开始重新从1报数
@@ -39,13 +40,18 @@ int main() {
 		inputFile >> elem;
 		CLList.CycleListInsert(i + 1, elem );
 	}
+	//mans用来存储出队顺序
+	int *mans = new int[Num_Human];
+
+	CLList.Joseph(mans, MaxNum, Num_Human);
 
 
 
-
-
-	
-
+	for (int i = 0; i < CLList.CycleListLength(); i++)
+	{
+		outfile << *(mans+i) << " ";
+	}
+	delete []mans;
 	inputFile.close();
 	outfile.close();
 }
