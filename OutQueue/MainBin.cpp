@@ -38,7 +38,7 @@ int main() {
 	{
 		int elem;
 		inputFile >> elem;
-		CLList.CycleListInsert(i + 1, elem );
+		CLList.CycleListInsert(i + 1, elem ,i+1);
 	}
 	//mans用来存储出队顺序
 	int *mans = new int[Num_Human];
@@ -54,4 +54,5 @@ int main() {
 	delete []mans;
 	inputFile.close();
 	outfile.close();
+	system("pause");
 }

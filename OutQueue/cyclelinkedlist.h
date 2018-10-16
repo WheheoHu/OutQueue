@@ -7,8 +7,10 @@ struct CycleNode
 	T data;
 	CycleNode *prenode;
 	CycleNode *nextnode;
-	CycleNode(const T &d) :data(d), prenode(NULL), nextnode(NULL) {}
-	
+	int index;
+	CycleNode(const T &d) :data(d), prenode(NULL), nextnode(NULL), index(0) {}
+	CycleNode(const T &d, const int index) :data(d), prenode(NULL), nextnode(NULL), index(index) {}
+
 };
 
 //Ë«Ñ­»·Á´±í
@@ -26,15 +28,16 @@ public:
 	bool isEmpty();
 	int  CycleListLength();
 	void CycleListInsert(int location, T elem);
+	void CycleListInsert(int location, T elem, int index);
 	void CycleListDelete(int location);
 	void CycleListDelete(int location, T &elem);
 	T getElem(int location);
-	void Joseph(int *op, int muxnum,int num_human);
+	void Joseph(int *op, int maxnum, int num_human);
 private:
 	CycleNode<T> *head;
 	CycleNode<T> *find(int location) {
 		CycleNode<T> *p = head;
-		for (int i = 0; i < location-1; i++)
+		for (int i = 0; i < location - 1; i++)
 		{
 			p = p->nextnode;
 		}
@@ -100,11 +103,26 @@ inline int Cycle_Linked_List<T>::CycleListLength()
 template<class T>
 inline void Cycle_Linked_List<T>::CycleListInsert(int location, T elem)
 {
-	if (location<1 || location>CycleListLength()+1)
+	if (location<1 || location>CycleListLength() + 1)
 	{
 		exit(OVERFLOW);
 	}
 	CycleNode<T> *insertnode = new CycleNode<T>(elem);
+	CycleNode<T> *temp = find(location);
+	insertnode->nextnode = temp->nextnode;
+	insertnode->nextnode->prenode = insertnode;
+	insertnode->prenode = temp;
+	temp->nextnode = insertnode;
+}
+
+template<class T>
+inline void Cycle_Linked_List<T>::CycleListInsert(int location, T elem, int index)
+{
+	if (location<1 || location>CycleListLength() + 1)
+	{
+		exit(OVERFLOW);
+	}
+	CycleNode<T> *insertnode = new CycleNode<T>(elem,index);
 	CycleNode<T> *temp = find(location);
 	insertnode->nextnode = temp->nextnode;
 	insertnode->nextnode->prenode = insertnode;
@@ -165,8 +183,21 @@ inline T Cycle_Linked_List<T>::getElem(int location)
 }
 
 template<class T>
-inline void Cycle_Linked_List<T>::Joseph(int * op, int muxnum, int num_human)
+inline void Cycle_Linked_List<T>::Joseph(int * mans, int maxnum, int num_human)
 {
+	CycleNode<T> *p = head;
+	int count = 1;
+	while (count < maxnum)
+	{
+		if (p->nextnode == head)
+		{
+			p = p->nextnode->nextnode;
+			count++;
+		}
+		p = p->nextnode;
+		count++;
+	}
+
 
 
 
