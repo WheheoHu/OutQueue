@@ -7,9 +7,8 @@ struct CycleNode
 	T data;
 	CycleNode *prenode;
 	CycleNode *nextnode;
-	int freq;
-	CycleNode(const T &d) :data(d), prenode(NULL), nextnode(NULL),freq(0) {}
-	CycleNode(const T &d,int freq) :data(d), prenode(NULL), nextnode(NULL), freq(freq) {}
+	CycleNode(const T &d) :data(d), prenode(NULL), nextnode(NULL) {}
+	
 };
 
 //Ë«Ñ­»·Á´±í
@@ -30,9 +29,6 @@ public:
 	void CycleListDelete(int location);
 	void CycleListDelete(int location, T &elem);
 	T getElem(int location);
-	void setFreqPlus(int location);
-	int getFreq(int location);
-	void LOCATE(T elem);//LOCATEËã·¨
 private:
 	CycleNode<T> *head;
 	CycleNode<T> *find(int location) {
@@ -167,48 +163,4 @@ inline T Cycle_Linked_List<T>::getElem(int location)
 	return p->nextnode->data;
 }
 
-template<class T>
-inline void Cycle_Linked_List<T>::setFreqPlus(int location)
-{
-	CycleNode<T> *p = find(location);
-	p->nextnode->freq++;
-}
 
-template<class T>
-inline int Cycle_Linked_List<T>::getFreq(int location)
-{
-	CycleNode<T> *p = find(location);
-	return p->nextnode->freq;
-}
-
-template<class T>
-inline void Cycle_Linked_List<T>::LOCATE(T elem)
-{	
-	int location = 1;
-	CycleNode<T> *p = head;
-	while (p->nextnode->data!=elem)
-	{
-		p = p->nextnode;
-		location++;
-	}
-	if (p->nextnode!=head)
-	{
-		setFreqPlus(location);
-	}
-	CycleNode<T> *newtemp = new CycleNode<T>(p->nextnode->data, p->nextnode->freq);
-	CycleNode<T> *temp = find(location);
-	temp->nextnode = p->nextnode->nextnode;
-	p->nextnode->nextnode->prenode = temp->nextnode;
-	location = 1;
-	temp = head;
-	while (temp->nextnode->freq>newtemp->freq)
-	{
-		temp = temp->nextnode;
-		location++;
-	}
-	newtemp->nextnode = temp->nextnode;
-	temp->nextnode->prenode = newtemp;
-	temp->nextnode = newtemp;
-	newtemp->prenode = temp;
-	
-}

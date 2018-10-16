@@ -31,6 +31,7 @@ int main() {
 	//读入上限MaxNum与人数Num_Human
 	inputFile >> MaxNum;
 	inputFile >> Num_Human;
+	//将每个人的密码存储进循环链表
 	Cycle_Linked_List<int> CLList;
 	for (int i = 0; i < Num_Human; i++)
 	{
@@ -40,10 +41,10 @@ int main() {
 	}
 
 
-	for (int i = 0; i < CLList.CycleListLength(); i++)
-	{
-		outfile << CLList.getElem(i + 1) << " ";
-	}
+
+
+
+	
 
 	inputFile.close();
 	outfile.close();
