@@ -54,5 +54,5 @@ int main() {
 	delete []mans;
 	inputFile.close();
 	outfile.close();
-	system("pause");
+	//system("pause");
 }

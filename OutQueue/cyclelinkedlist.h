@@ -186,20 +186,55 @@ template<class T>
 inline void Cycle_Linked_List<T>::Joseph(int * mans, int maxnum, int num_human)
 {
 	CycleNode<T> *p = head;
+	int mans_index = 0;
+	int numtocount = maxnum;
 	int count = 1;
-	while (count < maxnum)
+	for (int i = 0; i < num_human; i++)
 	{
-		if (p->nextnode == head)
+
+		while (count < numtocount)
 		{
-			p = p->nextnode->nextnode;
+			if (p->nextnode == head)
+			{
+				p = p->nextnode->nextnode;
+				count++;
+			}
+			p = p->nextnode;
 			count++;
 		}
-		p = p->nextnode;
-		count++;
+		if (p->nextnode==head)
+		{
+			mans[mans_index] = p->nextnode->nextnode->index;
+		}
+		else
+		{
+			mans[mans_index] = p->nextnode->index;
+		}
+		mans_index++;
+		if (p->nextnode==head)
+		{
+			numtocount = p->nextnode->nextnode->data;
+		}
+		else
+		{
+			numtocount = p->nextnode->data;
+		}
+		count = 1;
+		CycleNode<T> *temp = p;
+		if (p->nextnode=head)
+		{
+			temp->nextnode = p->nextnode->nextnode->nextnode;
+			p->nextnode->nextnode->nextnode->prenode = temp->nextnode;
+		}
+		else
+		{
+			temp->nextnode = p->nextnode->nextnode;
+			p->nextnode->nextnode->prenode = temp->nextnode;
+		}
+		
+
+
 	}
-
-
-
 
 }
 
