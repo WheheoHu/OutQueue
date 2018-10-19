@@ -5,11 +5,11 @@ template<typename T>
 struct CycleNode
 {
 	T data;
-	CycleNode *prenode;
-	CycleNode *nextnode;
+	CycleNode *prenode, *nextnode;
 	int index;
-	CycleNode(const T &d) :data(d), prenode(NULL), nextnode(NULL), index(0) {}
-	CycleNode(const T &d, const int index) :data(d), prenode(NULL), nextnode(NULL), index(index) {}
+	bool isOut;
+	CycleNode(const T &d) :data(d), prenode(NULL), nextnode(NULL), index(0) ,isOut(false){}
+	CycleNode(const T &d, const int index) :data(d), prenode(NULL), nextnode(NULL), index(index),isOut(false) {}
 
 };
 
@@ -69,6 +69,7 @@ template<class T>
 inline void Cycle_Linked_List<T>::InitCycleList()
 {
 	head = new CycleNode<T>(0);
+	head->isOut = true;
 	head->prenode = head;
 	head->nextnode = head;
 }
@@ -189,26 +190,30 @@ inline void Cycle_Linked_List<T>::Joseph(int * mans, int maxnum, int num_human)
 	int mans_index = 0;
 	int numtocount = maxnum;
 	int count = 1;
-	for (int i = 0; i < num_human; i++)
-	{
+	/*for (int i = 0; i < num_human; i++){
 
-		while (count < numtocount)
+		while (count <= numtocount)
 		{
-			if (p->nextnode == head)
+			if (p->nextnode->isOut==true)
 			{
 				p = p->nextnode->nextnode;
 				count++;
 			}
-			p = p->nextnode;
-			count++;
+			else
+			{
+				p = p->nextnode;
+				count++;
+			}
 		}
 		if (p->nextnode==head)
 		{
 			mans[mans_index] = p->nextnode->nextnode->index;
+			p->nextnode->nextnode->isOut = true;
 		}
 		else
 		{
 			mans[mans_index] = p->nextnode->index;
+			p->nextnode->isOut = true;
 		}
 		mans_index++;
 		if (p->nextnode==head)
@@ -219,23 +224,11 @@ inline void Cycle_Linked_List<T>::Joseph(int * mans, int maxnum, int num_human)
 		{
 			numtocount = p->nextnode->data;
 		}
-		count = 1;
-		CycleNode<T> *temp = p;
-		if (p->nextnode=head)
-		{
-			temp->nextnode = p->nextnode->nextnode->nextnode;
-			p->nextnode->nextnode->nextnode->prenode = temp->nextnode;
-		}
-		else
-		{
-			temp->nextnode = p->nextnode->nextnode;
-			p->nextnode->nextnode->prenode = temp->nextnode;
-		}
-		
-
+	}*/
+	for (int i = 0; i < num_human; i++)
+	{
 
 	}
-
 }
 
 
