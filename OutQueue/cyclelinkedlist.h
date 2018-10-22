@@ -5,18 +5,17 @@ template<typename T>
 struct CycleNode
 {
 	T data;
-	CycleNode *prenode, *nextnode;
+	CycleNode  *nextnode;
 	int index;
 	bool isOut;
-	CycleNode(const T &d) :data(d), prenode(NULL), nextnode(NULL), index(0) ,isOut(false){}
-	CycleNode(const T &d, const int index) :data(d), prenode(NULL), nextnode(NULL), index(index),isOut(false) {}
+	CycleNode(const T &d) :data(d), nextnode(NULL), index(0) ,isOut(false){}
+	CycleNode(const T &d, const int index) :data(d), nextnode(NULL), index(index),isOut(false) {}
 
 };
 
 //双循环链表
 //head节点默认为0
 //head->nextnode为第一个节点
-//head->prenode为最后节点
 template <class T>
 
 class Cycle_Linked_List {
@@ -32,6 +31,7 @@ public:
 	void CycleListDelete(int location);
 	void CycleListDelete(int location, T &elem);
 	T getElem(int location);
+	int getindex(int location);
 	void Joseph(int *op, int maxnum, int num_human);
 private:
 	CycleNode<T> *head;
@@ -70,7 +70,6 @@ inline void Cycle_Linked_List<T>::InitCycleList()
 {
 	head = new CycleNode<T>(0);
 	head->isOut = true;
-	head->prenode = head;
 	head->nextnode = head;
 }
 
@@ -111,8 +110,6 @@ inline void Cycle_Linked_List<T>::CycleListInsert(int location, T elem)
 	CycleNode<T> *insertnode = new CycleNode<T>(elem);
 	CycleNode<T> *temp = find(location);
 	insertnode->nextnode = temp->nextnode;
-	insertnode->nextnode->prenode = insertnode;
-	insertnode->prenode = temp;
 	temp->nextnode = insertnode;
 }
 
@@ -126,8 +123,7 @@ inline void Cycle_Linked_List<T>::CycleListInsert(int location, T elem, int inde
 	CycleNode<T> *insertnode = new CycleNode<T>(elem,index);
 	CycleNode<T> *temp = find(location);
 	insertnode->nextnode = temp->nextnode;
-	insertnode->nextnode->prenode = insertnode;
-	insertnode->prenode = temp;
+
 	temp->nextnode = insertnode;
 }
 
@@ -148,7 +144,6 @@ inline void Cycle_Linked_List<T>::CycleListDelete(int location)
 	CycleNode *predeletnode = find(location);
 	CycleNode *temp = predeletnode->nextnode;
 	predeletnode->nextnode = temp->nextnode;
-	temp->nextnode->prenode = predeletnode;
 	delete temp;
 
 
@@ -172,7 +167,6 @@ inline void Cycle_Linked_List<T>::CycleListDelete(int location, T & elem)
 	CycleNode<T> *temp = predeletnode->nextnode;
 	elem = temp->data;
 	predeletnode->nextnode = temp->nextnode;
-	temp->nextnode->prenode = predeletnode;
 	delete temp;
 }
 
@@ -181,6 +175,14 @@ inline T Cycle_Linked_List<T>::getElem(int location)
 {
 	CycleNode<T> *p = find(location);
 	return p->nextnode->data;
+}
+
+template<class T>
+inline int Cycle_Linked_List<T>::getindex(int location)
+{
+	CycleNode<T> *p = find(location);
+
+	return p->nextnode->index;
 }
 
 template<class T>
@@ -227,7 +229,7 @@ inline void Cycle_Linked_List<T>::Joseph(int * mans, int maxnum, int num_human)
 	}*/
 	for (int i = 0; i < num_human; i++)
 	{
-
+		mans[i] = getindex(i + 1);
 	}
 }
 
