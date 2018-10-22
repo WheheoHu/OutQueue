@@ -189,9 +189,9 @@ template<class T>
 inline void Cycle_Linked_List<T>::Joseph(int * mans, int maxnum, int num_human)
 {
 	CycleNode<T> *p = head;
+	CycleNode<T> *q = head;
 	int mans_index = 0;
 	int numtocount = maxnum;
-	int count = 1;
 	/*for (int i = 0; i < num_human; i++){
 
 		while (count <= numtocount)
@@ -227,9 +227,24 @@ inline void Cycle_Linked_List<T>::Joseph(int * mans, int maxnum, int num_human)
 			numtocount = p->nextnode->data;
 		}
 	}*/
-	for (int i = 0; i < num_human; i++)
+	while (num_human>0)
 	{
-		mans[i] = getindex(i + 1);
+		for (int i = 1; i < numtocount; i++)
+		{
+			if (p->nextnode==head)
+			{
+				p = p->nextnode->nextnode;
+			}
+			p = p->nextnode;
+		}
+		if (p->nextnode==head)
+		{
+			p = p->nextnode;
+		}
+		mans[mans_index] = p->nextnode->index;
+		mans_index++;
+		p = p->nextnode->nextnode;
+		num_human--;
 	}
 }
 
