@@ -241,9 +241,11 @@ inline void Cycle_Linked_List<T>::Joseph(int * mans, int maxnum, int num_human)
 		{
 			p = p->nextnode;
 		}
+		numtocount = p->nextnode->data;
 		mans[mans_index] = p->nextnode->index;
 		mans_index++;
 		p = p->nextnode->nextnode;
+	
 		num_human--;
 	}
 }
