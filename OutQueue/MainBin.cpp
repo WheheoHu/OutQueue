@@ -46,7 +46,7 @@ int main() {
 	CLList.Joseph(mans, MaxNum, Num_Human);
 
 
-	for (int i = 0; i < CLList.CycleListLength(); i++)
+	for (int i = 0; i < Num_Human; i++)
 	{
 		outfile << *(mans+i) << " ";
 	}
