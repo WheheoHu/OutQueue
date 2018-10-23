@@ -43,9 +43,10 @@ int main() {
 	//mans用来存储出队顺序
 	int *mans = new int[Num_Human];
 
+
 	CLList.Joseph(mans, MaxNum, Num_Human);
 
-
+	//将出队列顺序输出到文件output
 	for (int i = 0; i < Num_Human; i++)
 	{
 		outfile << *(mans+i) << " ";
@@ -53,5 +54,4 @@ int main() {
 	delete []mans;
 	inputFile.close();
 	outfile.close();
-	//system("pause");
 }

@@ -185,6 +185,7 @@ inline int Cycle_Linked_List<T>::getindex(int location)
 	return p->nextnode->index;
 }
 
+
 template<class T>
 inline void Cycle_Linked_List<T>::Joseph(int * mans, int maxnum, int num_human)
 {
